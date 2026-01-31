@@ -1,0 +1,251 @@
+
+:root {
+  /* Colors */
+  --color-primary: #00ff88;
+  --color-primary-dark: #00cc6a;
+  --color-secondary: #1a1a2e;
+  --color-background: #0a0a14;
+  --color-background-light: #141428;
+  --color-text: #ffffff;
+  --color-text-gray: #a0a0b8;
+  --color-border: rgba(0, 255, 136, 0.15);
+  --color-glow: rgba(0, 255, 136, 0.3);
+  
+  /* Gradients */
+  --gradient-bg: linear-gradient(135deg, #0a0a14 0%, #141428 50%, #1a1a2e 100%);
+  --gradient-card: linear-gradient(145deg, #1a1a2e 0%, #141428 100%);
+  --gradient-primary: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+  
+  /* Typography */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Nunito', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 50px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--color-glow);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ========================================
+   CONTAINER & LAYOUT
+   ======================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0f1419;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+/* Logo */
+.logo {
+  flex-shrink: 0;
+}
+
+.logo h2 {
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-text);
+  transition: var(--transition-fast);
+}
+
+.logo i {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+}
+
+.logo .ref {
+  color: var(--color-primary);
+}
+
+.logo:hover h2 {
+  opacity: 0.9;
+}
+
+/* Nav Button Container (PC Menu + Report Button) */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex: 1;
+  justify-content: center;
+}
+
+/* PC Menu */
+.pc-menu {
+  display: flex;
+}
+
+.pc-menu ul {
+  display: flex;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.35rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  list-style: none;
+  margin: 0;
+}
+
+.pc-menu ul li {
+  margin: 0;
+}
+
+.pc-menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pc-menu ul li a i {
+  font-size: 1.05rem;
+}
+
+.pc-menu ul li a:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pc-menu ul li a.active {
+  color: #ffffff;
+  background: rgba(0, 255, 136, 0.12);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2);
+}
+
+/* Report Button */
+.report-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.6rem;
+  background: var(--gradient-primary);
+  color: #0a0a14;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.25);
+  border: none;
+  cursor: pointer;
+}
+
+.report-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.35);
+  background: #00ff88;
+}
+
+.report-btn i {
+  font-size: 1rem;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
