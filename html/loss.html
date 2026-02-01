@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/CSS/style.css" />
     <link rel="stylesheet" href="/CSS/loss.css" />
   </head>
-  <body>
+<body>
     <!-- Header -->
 <header class="main-header">
     <div class="container header-inner">
@@ -63,7 +63,7 @@
 </header>
 
  <!-- Hero -->
- <section class="loss-hero">
+<section class="loss-hero">
     <div class="container">
       <div class="loss-hero-content">
         <h1>Lost Items</h1>
@@ -83,10 +83,21 @@
         </div>
       </div>
     </div>
-  </section>
+</section>
 
+   <!-- Listings -->
+<section class="loss-listings">
+    <div class="container">
+      <div class="loss-listings-header">
+        <h2>All Lost Items</h2>
+        <span id="lossCount" class="loss-count-badge">0 items</span>
+      </div>
 
-
+      <div class="loss-listings-grid" id="lossListings">
+        <!-- Filled by loss.js -->
+      </div>
+    </div>
+</section>
 
     <!-- footer  -->
 <footer class="footer">
@@ -133,7 +144,7 @@
 </footer>
 
     <!-- Scripts -->
-    <script src="/Js/script.js"></script>
-    <script src="/Js/loss.js"></script>
-  </body>
+<script src="/Js/script.js"></script>
+<script src="/Js/loss.js"></script>
+</body>
 </html>
