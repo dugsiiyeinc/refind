@@ -75,3 +75,34 @@
   transform: scale(1.05);
   box-shadow: var(--shadow-glow);
 }
+
+/* Listings Section */
+.loss-listings {
+  padding: var(--spacing-2xl) 0;
+}
+
+.loss-listings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.loss-listings-header h2 {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.loss-count-badge {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff4444;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
