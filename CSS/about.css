@@ -259,3 +259,19 @@
   color: var(--color-text-gray);
   line-height: 1.7;
 }
+/* Our Story */
+.about-story {
+  padding: var(--spacing-2xl) 0;
+}
+
+.about-story-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-story-body p {
+  font-size: 1.1rem;
+  color: var(--color-text-gray);
+  line-height: 1.9;
+  margin-bottom: var(--spacing-md);
+}
