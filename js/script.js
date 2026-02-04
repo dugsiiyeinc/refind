@@ -95,3 +95,107 @@ const closeModalBtn = document.getElementById('closeModal');
 const cancelBtn = document.getElementById('cancelBtn');
 const reportForm = document.getElementById('reportForm');
 
+// MOBILE MENU TOGGLE
+
+if (hamburgerBtn) {
+  let mobileMenu = document.querySelector('.mobile-menu');
+  if (!mobileMenu) {
+    mobileMenu = document.createElement('div');
+    mobileMenu.className = 'mobile-menu';
+    mobileMenu.id = 'mobileMenu';
+    const pcMenu = document.querySelector('.pc-menu ul');
+    if (pcMenu) {
+      const menuHTML = `
+        <ul>
+          ${Array.from(pcMenu.children).map(li => li.outerHTML).join('')}
+        </ul>
+        <button class="report-btn btn-primary" onclick="document.getElementById('reportBtn').click()">
+          <i class="fas fa-plus"></i>
+          Report Item
+        </button>
+      `;
+      mobileMenu.innerHTML = menuHTML;
+    }
+    const header = document.querySelector('.main-header');
+    if (header) {
+      header.parentNode.insertBefore(mobileMenu, header.nextSibling);
+    }
+  }
+  
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    hamburgerBtn.classList.toggle('active');
+    if (mobileMenu.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      hamburgerBtn.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('active') && 
+        !mobileMenu.contains(e.target) && 
+        !hamburgerBtn.contains(e.target)) {
+      mobileMenu.classList.remove('active');
+      hamburgerBtn.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+// MODAL FUNCTIONS
+
+function openModal() {
+  if (reportModal) {
+    reportModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal() {
+  if (reportModal) {
+    reportModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (reportForm) {
+      reportForm.reset();
+    }
+  }
+}
+
+if (reportBtns) {
+  reportBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
+  });
+}
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', closeModal);
+}
+
+if (cancelBtn) {
+  cancelBtn.addEventListener('click', closeModal);
+}
+
+if (reportModal) {
+  reportModal.addEventListener('click', (e) => {
+    if (e.target === reportModal) {
+      closeModal();
+    }
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && reportModal && reportModal.classList.contains('active')) {
+    closeModal();
+  }
+});
+
+
+
