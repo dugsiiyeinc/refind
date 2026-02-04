@@ -197,5 +197,41 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// FORM SUBMISSION
+if (reportForm) {
+  reportForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+
+    const formData = new FormData(reportForm);
+    const newItem = {
+      id: Date.now(),
+      title: formData.get('title'),
+      description: formData.get('description'),
+      location: formData.get('location'),
+      contact: formData.get('contact'),
+      status: formData.get('status'),
+      thumbnailUrl: formData.get('thumbnailUrl') || 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400',
+      date: new Date().toISOString().split('T')[0]
+    };
+    
+    const wordCount = newItem.description.trim().split(/\s+/).length;
+    if (wordCount > 100) {
+      alert('Description must be 100 words or less. Current: ' + wordCount + ' words');
+      return;
+    }
+    let items = JSON.parse(localStorage.getItem('refindItems')) || [];
+    items.unshift(newItem);
+    localStorage.setItem('refindItems', JSON.stringify(items));
+
+    alert('Item reported successfully!');
+    
+
+    closeModal();
+    
+
+    window.location.reload();
+  });
+}
 
 
