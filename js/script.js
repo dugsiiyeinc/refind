@@ -81,3 +81,17 @@ const itemsData = [
     date: "2026-01-21"
   }
 ];
+
+if (!localStorage.getItem('refindItems')) {
+  localStorage.setItem('refindItems', JSON.stringify(itemsData));
+}
+
+// DOM ELEMENTS
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const reportBtns = document.querySelectorAll('#reportBtn, #ctaReportBtn, #aboutReportBtn');
+const reportModal = document.getElementById('reportModal');
+const closeModalBtn = document.getElementById('closeModal');
+const cancelBtn = document.getElementById('cancelBtn');
+const reportForm = document.getElementById('reportForm');
+
