@@ -234,4 +234,97 @@ if (reportForm) {
   });
 }
 
+// DISPLAY RECENT LISTINGS 
+const recentListingsContainer = document.getElementById('recentListings');
 
+if (recentListingsContainer) {
+  displayRecentListings();
+}
+
+function displayRecentListings() {
+  const items = JSON.parse(localStorage.getItem('refindItems')) || [];
+  const recentItems = items.slice(0, 6); // Show 6 most recent items
+  
+  if (recentItems.length === 0) {
+    recentListingsContainer.innerHTML = `
+      <div class="loss-empty-state" style="grid-column: 1/-1;">
+        <i class="fas fa-box-open"></i>
+        <h3>No items yet</h3>
+        <p>Be the first to report an item!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  recentListingsContainer.innerHTML = recentItems.map(item => `
+    <div class="listing-card">
+      <img src="${item.thumbnailUrl}" alt="${item.title}" class="listing-image" onerror="this.src='https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=400'">
+      <div class="listing-content">
+        <span class="listing-status ${item.status}">${item.status === 'lost' ? 'Lost' : 'Found'}</span>
+        <h3 class="listing-title">${item.title}</h3>
+        <p class="listing-desc">${item.description}</p>
+        <div class="listing-meta">
+          <div><i class="fas fa-location-dot"></i> ${item.location}</div>
+          <div><i class="fas fa-phone"></i> ${item.contact}</div>
+          <div><i class="fas fa-calendar"></i> ${formatDate(item.date)}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now - date);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) {
+    return 'Today';
+  } else if (diffDays === 1) {
+    return 'Yesterday';
+  } else if (diffDays < 7) {
+    return `${diffDays} days ago`;
+  } else {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+function setActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  const pcMenuLinks = document.querySelectorAll('.pc-menu a');
+  pcMenuLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.includes(currentPage)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+  
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+  mobileMenuLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.includes(currentPage)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+setActiveNavLink();
