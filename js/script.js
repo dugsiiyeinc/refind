@@ -149,3 +149,53 @@ if (hamburgerBtn) {
     }
   });
 }
+
+// MODAL FUNCTIONS
+
+function openModal() {
+  if (reportModal) {
+    reportModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal() {
+  if (reportModal) {
+    reportModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (reportForm) {
+      reportForm.reset();
+    }
+  }
+}
+
+if (reportBtns) {
+  reportBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
+  });
+}
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', closeModal);
+}
+
+if (cancelBtn) {
+  cancelBtn.addEventListener('click', closeModal);
+}
+
+if (reportModal) {
+  reportModal.addEventListener('click', (e) => {
+    if (e.target === reportModal) {
+      closeModal();
+    }
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && reportModal && reportModal.classList.contains('active')) {
+    closeModal();
+  }
+});
+
+
+
