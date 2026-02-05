@@ -1,3 +1,5 @@
+
+
 const lossListingsContainer = document.getElementById('lossListings');
 const lossSearchInput = document.getElementById('lossSearchInput');
 const lossSearchBtn = document.getElementById('lossSearchBtn');
@@ -8,15 +10,12 @@ let allLostItems = [];
 function initLostItemsPage() {
   loadLostItems();
   displayLostItems(allLostItems);
+  updateItemCount();
 }
-
-// LOAD LOST ITEMS FROM LOCALSTORAGE
-
 function loadLostItems() {
   const items = JSON.parse(localStorage.getItem('refindItems')) || [];
   allLostItems = items.filter(item => item.status === 'lost');
 }
-
 // DISPLAY LOST ITEMS
 function displayLostItems(items) {
   if (!lossListingsContainer) return;
@@ -62,13 +61,13 @@ function displayLostItems(items) {
     </div>
   `).join('');
 }
-
 // SEARCH FUNCTIONALITY
 function searchLostItems() {
   const searchTerm = lossSearchInput.value.toLowerCase().trim();
   
   if (searchTerm === '') {
     displayLostItems(allLostItems);
+    updateItemCount();
     return;
   }
   
@@ -82,9 +81,15 @@ function searchLostItems() {
   });
   
   displayLostItems(filteredItems);
- 
+  updateItemCount(filteredItems.length);
 }
-
+// UPDATE ITEM COUNT
+function updateItemCount(count) {
+  if (!lossCountBadge) return;
+  
+  const displayCount = count !== undefined ? count : allLostItems.length;
+  lossCountBadge.textContent = `${displayCount} ${displayCount === 1 ? 'item' : 'items'}`;
+}
 // EVENT LISTENERS
 if (lossSearchBtn) {
   lossSearchBtn.addEventListener('click', searchLostItems);
@@ -100,10 +105,6 @@ if (lossSearchInput) {
   // Real-time search as user types
   lossSearchInput.addEventListener('input', searchLostItems);
 }
-
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
 function formatDate(dateString) {
   const date = new Date(dateString);
   const now = new Date();
@@ -120,10 +121,6 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 }
-
-// ========================================
-// INITIALIZE ON PAGE LOAD
-// ========================================
 if (lossListingsContainer) {
   initLostItemsPage();
 }
